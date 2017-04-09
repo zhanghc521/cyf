@@ -1,5 +1,6 @@
 package com.app.chengyifang.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,5 +26,16 @@ public class UserService {
 		return list.get(0);
 	}
 	
+	public int getUserByUsernameAndPassword(String userName, String password){
+		
+		UserExample example = new UserExample();
+		UserExample.Criteria criteria = example.createCriteria();
+		criteria.andNameEqualTo(userName);
+		criteria.andPasswordEqualTo(password);
+		List<User> users = new ArrayList<User>(); 
+		users = userMapper.selectByExample(example);
+		
+		return users.size();
+	}
 	
 }

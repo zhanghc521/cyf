@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+
+ <changeSet id="20170326" author="zhc">
+        <createTable tableName="user">
+            <column name="id" type="varchar(100)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="varchar(100)" remarks="密码">
+            </column>
+            <column name="avatar" type="varchar(100)" remarks="头像">
+            </column>
+            <column name="status" type="varchar(100)"  remarks="状态">
+            </column>
+            <column name="isDelete" type="boolean" defaultValueBoolean="true"  remarks="删除"/>
+            <column name="createtime" remarks="创建时间" type="TIMESTAMP">
+			</column>
+			<column name="creater" remarks="创建人" type="VARCHAR(50)" />
+			<column name="editetime" remarks="操作时间" type="TIMESTAMP">
+			</column>
+			<column name="operator" remarks="操作人" type="VARCHAR(50)" />
+        </createTable>
+        <createTable tableName="message" remarks="留言表">
+            <column name="id" type="varchar(100)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+             <column name="nickName" type="varchar(100)" remarks="昵称">
+            </column>
+            <column name="openId" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="context" type="varchar(100)" remarks="内容">
+            </column>
+            <column name="createtime" remarks="创建时间" type="TIMESTAMP">
+			</column>
+			<column name="creater" remarks="创建人" type="VARCHAR(50)" />
+			<column name="editetime" remarks="操作时间" type="TIMESTAMP">
+			</column>
+			<column name="operator" remarks="操作人" type="VARCHAR(50)" />
+        </createTable>
+        <createTable tableName="haveToGo" remarks="不得不去表">
+            <column name="id" type="varchar(100)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="title" remarks="标题" type="VARCHAR(100)" />
+            <column name="context" remarks="内容" type="VARCHAR(800)" />
+            <column name="picture" remarks="图片" type="VARCHAR(300)" />
+             <column name="createtime" remarks="创建时间" type="TIMESTAMP">
+			</column>
+			<column name="creater" remarks="创建人" type="VARCHAR(50)" />
+			<column name="editetime" remarks="操作时间" type="TIMESTAMP">
+			</column>
+			<column name="operator" remarks="操作人" type="VARCHAR(50)" />
+        </createTable>
+         <createTable tableName="haveToEat" remarks="不得不吃表">
+            <column name="id" type="varchar(100)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="title" remarks="标题" type="VARCHAR(100)" />
+            <column name="context" remarks="内容" type="VARCHAR(800)" />
+            <column name="picture" remarks="图片" type="VARCHAR(300)" />
+             <column name="createtime" remarks="创建时间" type="TIMESTAMP">
+			</column>
+			<column name="creater" remarks="创建人" type="VARCHAR(50)" />
+			<column name="editetime" remarks="操作时间" type="TIMESTAMP">
+			</column>
+			<column name="operator" remarks="操作人" type="VARCHAR(50)" />
+        </createTable>
+         <createTable tableName="haveToBuy" remarks="不得不买表">
+            <column name="id" type="varchar(100)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="title" remarks="标题" type="VARCHAR(100)" />
+            <column name="context" remarks="内容" type="VARCHAR(800)" />
+            <column name="picture" remarks="图片" type="VARCHAR(300)" />
+             <column name="createtime" remarks="创建时间" type="TIMESTAMP">
+			</column>
+			<column name="creater" remarks="创建人" type="VARCHAR(50)" />
+			<column name="editetime" remarks="操作时间" type="TIMESTAMP">
+			</column>
+			<column name="operator" remarks="操作人" type="VARCHAR(50)" />
+        </createTable>
+         <createTable tableName="haveToKnow" remarks="不得不知表">
+            <column name="id" type="varchar(100)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="title" remarks="标题" type="VARCHAR(100)" />
+            <column name="context" remarks="内容" type="VARCHAR(800)" />
+            <column name="picture" remarks="图片" type="VARCHAR(300)" />
+             <column name="createtime" remarks="创建时间" type="TIMESTAMP">
+			</column>
+			<column name="creater" remarks="创建人" type="VARCHAR(50)" />
+			<column name="editetime" remarks="操作时间" type="TIMESTAMP">
+			</column>
+			<column name="operator" remarks="操作人" type="VARCHAR(50)" />
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

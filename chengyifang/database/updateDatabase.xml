@@ -1,0 +1,33 @@
+<project name="updateDatabase" default="updateDatabase">
+
+	<property file="database.properties">
+	</property>
+
+	<path id="jdbclib">
+		<fileset dir="${basedir}\lib" includes="mysql-connector-java-5.1.23-bin.jar" />
+	</path>
+
+	<target name="updateDatabase">
+
+		<taskdef resource="liquibasetasks.properties">
+			<classpath>
+				<pathelement location="${basedir}\lib\snakeyaml-1.13.jar" />
+				<pathelement location="${basedir}\lib\liquibase.jar" />
+			</classpath>
+		</taskdef>
+		
+	    <updateDatabase
+	            changeLogFile="${basedir}\changeLog.xml"
+	            driver="com.mysql.jdbc.Driver"
+	            url="jdbc:mysql://127.0.0.1:3306/cyf"
+	            username="root"
+	            password="root"
+	            promptOnNonLocalDatabase="false"
+	            dropFirst="false"
+	            classpathref="jdbclib"
+	    	    loglevel="info"
+	    />
+		
+	</target>
+
+</project>

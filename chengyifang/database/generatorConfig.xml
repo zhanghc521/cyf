@@ -27,8 +27,8 @@
 		</javaTypeResolver>
 
 		<!--生成Model.java文件 -->
-		<javaModelGenerator targetPackage="com.cyf.model"
-			targetProject="src/main/java">
+		<javaModelGenerator targetPackage="com.app.chengyifang.model"
+			targetProject="../src/main/java">
 			<!-- enableSubPackages:是否让schema作为包的后缀 -->
 			<property name="enableSubPackages" value="false" />
 			<!-- 是否针对string类型的字段在set的时候进行trim调用 -->
@@ -36,40 +36,20 @@
 		</javaModelGenerator>
 
 		<!-- 生成Mapper.xml文件 -->
-		<sqlMapGenerator targetPackage="com.cyf.mapping"
-			targetProject="src/main/resources">
+		<sqlMapGenerator targetPackage="mapper"
+			targetProject="../src/main/resources">
 			<!-- enableSubPackages:是否让schema作为包的后缀 -->
 			<property name="enableSubPackages" value="false" />
 		</sqlMapGenerator>
 
 		<!-- 生成Mapper.java文件，即dao层 -->
-		<javaClientGenerator type="XMLMAPPER"
-			targetPackage="com.cyf.mapper" targetProject="src/main/java">
+		<javaClientGenerator type="XMLMAPPER" targetPackage="com.app.chengyifang.mapper" 
+			targetProject="../src/main/java">
 			<property name="enableSubPackages" value="false" />
 		</javaClientGenerator>
 		
 		<!-- 待生成的数据库中的表名，生成一个表对应的Java和xml文件就需要配置一段 -->
-		<table tableName="user" domainObjectName="User"
-			enableCountByExample="true" enableUpdateByExample="true"
-			enableDeleteByExample="true" enableSelectByExample="true"
-			selectByExampleQueryId="true">
-		</table>
-		<table tableName="haveToGo" domainObjectName="haveToGo"
-			enableCountByExample="true" enableUpdateByExample="true"
-			enableDeleteByExample="true" enableSelectByExample="true"
-			selectByExampleQueryId="true">
-		</table>
-		<table tableName="haveToEat" domainObjectName="haveToEat"
-			enableCountByExample="true" enableUpdateByExample="true"
-			enableDeleteByExample="true" enableSelectByExample="true"
-			selectByExampleQueryId="true">
-		</table>
-		<table tableName="haveToBuy" domainObjectName="haveToBuy"
-			enableCountByExample="true" enableUpdateByExample="true"
-			enableDeleteByExample="true" enableSelectByExample="true"
-			selectByExampleQueryId="true">
-		</table>
-		<table tableName="haveToKnow" domainObjectName="haveToKnow"
+		<table tableName="infoView" domainObjectName="InfoView"
 			enableCountByExample="true" enableUpdateByExample="true"
 			enableDeleteByExample="true" enableSelectByExample="true"
 			selectByExampleQueryId="true">

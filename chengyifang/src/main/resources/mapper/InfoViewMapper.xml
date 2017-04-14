@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.app.chengyifang.mapper.InfoViewMapper" >
+  <resultMap id="BaseResultMap" type="com.app.chengyifang.model.InfoView" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="infoViewTtle" property="infoviewttle" jdbcType="VARCHAR" />
+    <result column="infoViewText1" property="infoviewtext1" jdbcType="VARCHAR" />
+    <result column="infoViewText2" property="infoviewtext2" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="creater" property="creater" jdbcType="VARCHAR" />
+    <result column="editetime" property="editetime" jdbcType="TIMESTAMP" />
+    <result column="operator" property="operator" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, infoViewTtle, infoViewText1, infoViewText2, createtime, creater, editetime, operator
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.app.chengyifang.model.InfoViewExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from infoview
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from infoview
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from infoview
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.app.chengyifang.model.InfoViewExample" >
+    delete from infoview
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.app.chengyifang.model.InfoView" >
+    insert into infoview (id, infoViewTtle, infoViewText1, 
+      infoViewText2, createtime, creater, 
+      editetime, operator)
+    values (#{id,jdbcType=VARCHAR}, #{infoviewttle,jdbcType=VARCHAR}, #{infoviewtext1,jdbcType=VARCHAR}, 
+      #{infoviewtext2,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{creater,jdbcType=VARCHAR}, 
+      #{editetime,jdbcType=TIMESTAMP}, #{operator,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.app.chengyifang.model.InfoView" >
+    insert into infoview
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="infoviewttle != null" >
+        infoViewTtle,
+      </if>
+      <if test="infoviewtext1 != null" >
+        infoViewText1,
+      </if>
+      <if test="infoviewtext2 != null" >
+        infoViewText2,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="creater != null" >
+        creater,
+      </if>
+      <if test="editetime != null" >
+        editetime,
+      </if>
+      <if test="operator != null" >
+        operator,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="infoviewttle != null" >
+        #{infoviewttle,jdbcType=VARCHAR},
+      </if>
+      <if test="infoviewtext1 != null" >
+        #{infoviewtext1,jdbcType=VARCHAR},
+      </if>
+      <if test="infoviewtext2 != null" >
+        #{infoviewtext2,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creater != null" >
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="editetime != null" >
+        #{editetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operator != null" >
+        #{operator,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.app.chengyifang.model.InfoViewExample" resultType="java.lang.Integer" >
+    select count(*) from infoview
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update infoview
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.infoviewttle != null" >
+        infoViewTtle = #{record.infoviewttle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.infoviewtext1 != null" >
+        infoViewText1 = #{record.infoviewtext1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.infoviewtext2 != null" >
+        infoViewText2 = #{record.infoviewtext2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null" >
+        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.creater != null" >
+        creater = #{record.creater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.editetime != null" >
+        editetime = #{record.editetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operator != null" >
+        operator = #{record.operator,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update infoview
+    set id = #{record.id,jdbcType=VARCHAR},
+      infoViewTtle = #{record.infoviewttle,jdbcType=VARCHAR},
+      infoViewText1 = #{record.infoviewtext1,jdbcType=VARCHAR},
+      infoViewText2 = #{record.infoviewtext2,jdbcType=VARCHAR},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      creater = #{record.creater,jdbcType=VARCHAR},
+      editetime = #{record.editetime,jdbcType=TIMESTAMP},
+      operator = #{record.operator,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.app.chengyifang.model.InfoView" >
+    update infoview
+    <set >
+      <if test="infoviewttle != null" >
+        infoViewTtle = #{infoviewttle,jdbcType=VARCHAR},
+      </if>
+      <if test="infoviewtext1 != null" >
+        infoViewText1 = #{infoviewtext1,jdbcType=VARCHAR},
+      </if>
+      <if test="infoviewtext2 != null" >
+        infoViewText2 = #{infoviewtext2,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creater != null" >
+        creater = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="editetime != null" >
+        editetime = #{editetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operator != null" >
+        operator = #{operator,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.app.chengyifang.model.InfoView" >
+    update infoview
+    set infoViewTtle = #{infoviewttle,jdbcType=VARCHAR},
+      infoViewText1 = #{infoviewtext1,jdbcType=VARCHAR},
+      infoViewText2 = #{infoviewtext2,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      creater = #{creater,jdbcType=VARCHAR},
+      editetime = #{editetime,jdbcType=TIMESTAMP},
+      operator = #{operator,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

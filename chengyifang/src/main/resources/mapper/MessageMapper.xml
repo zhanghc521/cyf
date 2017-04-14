@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.app.chengyifang.mapper.UserMapper">
-  <resultMap id="BaseResultMap" type="com.app.chengyifang.model.User">
+<mapper namespace="com.app.chengyifang.mapper.MessageMapper">
+  <resultMap id="BaseResultMap" type="com.app.chengyifang.model.Message">
     <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
-    <result column="status" jdbcType="VARCHAR" property="status" />
-    <result column="isDelete" jdbcType="BIT" property="isdelete" />
+    <result column="nickName" jdbcType="VARCHAR" property="nickname" />
+    <result column="openId" jdbcType="VARCHAR" property="openid" />
+    <result column="context" jdbcType="VARCHAR" property="context" />
     <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
     <result column="creater" jdbcType="VARCHAR" property="creater" />
     <result column="editetime" jdbcType="TIMESTAMP" property="editetime" />
@@ -72,16 +70,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, password, avatar, status, isDelete, createtime, creater, editetime, operator
+    id, nickName, openId, context, createtime, creater, editetime, operator
   </sql>
-  <select id="selectByExample" parameterType="com.app.chengyifang.model.UserExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.app.chengyifang.model.MessageExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     'true' as QUERYID,
     <include refid="Base_Column_List" />
-    from user
+    from message
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -92,49 +90,41 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from user
+    from message
     where id = #{id,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from user
+    delete from message
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.app.chengyifang.model.UserExample">
-    delete from user
+  <delete id="deleteByExample" parameterType="com.app.chengyifang.model.MessageExample">
+    delete from message
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.app.chengyifang.model.User">
-    insert into user (id, name, password, 
-      avatar, status, isDelete, 
-      createtime, creater, editetime, 
-      operator)
-    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{avatar,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{isdelete,jdbcType=BIT}, 
-      #{createtime,jdbcType=TIMESTAMP}, #{creater,jdbcType=VARCHAR}, #{editetime,jdbcType=TIMESTAMP}, 
-      #{operator,jdbcType=VARCHAR})
+  <insert id="insert" parameterType="com.app.chengyifang.model.Message">
+    insert into message (id, nickName, openId, 
+      context, createtime, creater, 
+      editetime, operator)
+    values (#{id,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{openid,jdbcType=VARCHAR}, 
+      #{context,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{creater,jdbcType=VARCHAR}, 
+      #{editetime,jdbcType=TIMESTAMP}, #{operator,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.app.chengyifang.model.User">
-    insert into user
+  <insert id="insertSelective" parameterType="com.app.chengyifang.model.Message">
+    insert into message
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
       </if>
-      <if test="name != null">
-        name,
+      <if test="nickname != null">
+        nickName,
       </if>
-      <if test="password != null">
-        password,
+      <if test="openid != null">
+        openId,
       </if>
-      <if test="avatar != null">
-        avatar,
-      </if>
-      <if test="status != null">
-        status,
-      </if>
-      <if test="isdelete != null">
-        isDelete,
+      <if test="context != null">
+        context,
       </if>
       <if test="createtime != null">
         createtime,
@@ -153,20 +143,14 @@
       <if test="id != null">
         #{id,jdbcType=VARCHAR},
       </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
+      <if test="nickname != null">
+        #{nickname,jdbcType=VARCHAR},
       </if>
-      <if test="password != null">
-        #{password,jdbcType=VARCHAR},
+      <if test="openid != null">
+        #{openid,jdbcType=VARCHAR},
       </if>
-      <if test="avatar != null">
-        #{avatar,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=VARCHAR},
-      </if>
-      <if test="isdelete != null">
-        #{isdelete,jdbcType=BIT},
+      <if test="context != null">
+        #{context,jdbcType=VARCHAR},
       </if>
       <if test="createtime != null">
         #{createtime,jdbcType=TIMESTAMP},
@@ -182,32 +166,26 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.app.chengyifang.model.UserExample" resultType="java.lang.Integer">
-    select count(*) from user
+  <select id="countByExample" parameterType="com.app.chengyifang.model.MessageExample" resultType="java.lang.Integer">
+    select count(*) from message
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update user
+    update message
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=VARCHAR},
       </if>
-      <if test="record.name != null">
-        name = #{record.name,jdbcType=VARCHAR},
+      <if test="record.nickname != null">
+        nickName = #{record.nickname,jdbcType=VARCHAR},
       </if>
-      <if test="record.password != null">
-        password = #{record.password,jdbcType=VARCHAR},
+      <if test="record.openid != null">
+        openId = #{record.openid,jdbcType=VARCHAR},
       </if>
-      <if test="record.avatar != null">
-        avatar = #{record.avatar,jdbcType=VARCHAR},
-      </if>
-      <if test="record.status != null">
-        status = #{record.status,jdbcType=VARCHAR},
-      </if>
-      <if test="record.isdelete != null">
-        isDelete = #{record.isdelete,jdbcType=BIT},
+      <if test="record.context != null">
+        context = #{record.context,jdbcType=VARCHAR},
       </if>
       <if test="record.createtime != null">
         createtime = #{record.createtime,jdbcType=TIMESTAMP},
@@ -227,13 +205,11 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update user
+    update message
     set id = #{record.id,jdbcType=VARCHAR},
-      name = #{record.name,jdbcType=VARCHAR},
-      password = #{record.password,jdbcType=VARCHAR},
-      avatar = #{record.avatar,jdbcType=VARCHAR},
-      status = #{record.status,jdbcType=VARCHAR},
-      isDelete = #{record.isdelete,jdbcType=BIT},
+      nickName = #{record.nickname,jdbcType=VARCHAR},
+      openId = #{record.openid,jdbcType=VARCHAR},
+      context = #{record.context,jdbcType=VARCHAR},
       createtime = #{record.createtime,jdbcType=TIMESTAMP},
       creater = #{record.creater,jdbcType=VARCHAR},
       editetime = #{record.editetime,jdbcType=TIMESTAMP},
@@ -242,23 +218,17 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.app.chengyifang.model.User">
-    update user
+  <update id="updateByPrimaryKeySelective" parameterType="com.app.chengyifang.model.Message">
+    update message
     <set>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
+      <if test="nickname != null">
+        nickName = #{nickname,jdbcType=VARCHAR},
       </if>
-      <if test="password != null">
-        password = #{password,jdbcType=VARCHAR},
+      <if test="openid != null">
+        openId = #{openid,jdbcType=VARCHAR},
       </if>
-      <if test="avatar != null">
-        avatar = #{avatar,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        status = #{status,jdbcType=VARCHAR},
-      </if>
-      <if test="isdelete != null">
-        isDelete = #{isdelete,jdbcType=BIT},
+      <if test="context != null">
+        context = #{context,jdbcType=VARCHAR},
       </if>
       <if test="createtime != null">
         createtime = #{createtime,jdbcType=TIMESTAMP},
@@ -275,18 +245,15 @@
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.app.chengyifang.model.User">
-    update user
-    set name = #{name,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      avatar = #{avatar,jdbcType=VARCHAR},
-      status = #{status,jdbcType=VARCHAR},
-      isDelete = #{isdelete,jdbcType=BIT},
+  <update id="updateByPrimaryKey" parameterType="com.app.chengyifang.model.Message">
+    update message
+    set nickName = #{nickname,jdbcType=VARCHAR},
+      openId = #{openid,jdbcType=VARCHAR},
+      context = #{context,jdbcType=VARCHAR},
       createtime = #{createtime,jdbcType=TIMESTAMP},
       creater = #{creater,jdbcType=VARCHAR},
       editetime = #{editetime,jdbcType=TIMESTAMP},
       operator = #{operator,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
- 
 </mapper>

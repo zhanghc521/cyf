@@ -4,18 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.app.chengyifang.model.HaveToBuy;
-import com.app.chengyifang.model.HaveToEat;
-import com.app.chengyifang.model.HaveToGo;
-import com.app.chengyifang.model.HaveToKnow;
-import com.app.chengyifang.service.HaveToBuyService;
-import com.app.chengyifang.service.HaveToEatService;
-import com.app.chengyifang.service.HaveToGoService;
-import com.app.chengyifang.service.HaveToKnowService;
+import com.app.chengyifang.model.InfoView;
+import com.app.chengyifang.model.Scenery;
+import com.app.chengyifang.service.InfoViewService;
+import com.app.chengyifang.service.SceneryService;
 
 /**
  * 小程序接口
@@ -27,37 +24,31 @@ import com.app.chengyifang.service.HaveToKnowService;
 public class AppController {
 	
 	@Autowired
-	HaveToEatService haveToEatService;
+	SceneryService sceneryService;
 	@Autowired
-	HaveToGoService haveToGoService;
-	@Autowired
-	HaveToKnowService haveToKnowService;
-	@Autowired
-	HaveToBuyService haveToBuyService;
+	InfoViewService infoViewService;
 
-	@RequestMapping(value = "/haveToEats", method = RequestMethod.GET)
-	public List<HaveToEat> getHaveToEats(){
+	@RequestMapping(value = "/scenerys", method = RequestMethod.POST)
+	public List<Scenery> getScenerys(){
 	
-		List<HaveToEat> result = new ArrayList<HaveToEat>();
-		haveToEatService.getHaveToEats();
+		List<Scenery> result = new ArrayList<Scenery>();
+		result = sceneryService.getScenerys();
 		return result;
 	}
-	@RequestMapping(value = "/haveToGos", method = RequestMethod.POST)
-	public List<HaveToGo> getHaveToGos(){
-		List<HaveToGo> result = new ArrayList<HaveToGo>();
-		haveToGoService.getHaveToGos();
+	
+	@RequestMapping(value = "/infoViews", method = RequestMethod.POST)
+	public List<InfoView> getInfoViews(){
+
+		List<InfoView> result = new ArrayList<InfoView>();
+		result = infoViewService.getInfoViews();
 		return result;
+		
 	}
-	@RequestMapping(value = "/haveToKnows", method = RequestMethod.POST)
-	public List<HaveToKnow> getHaveToKnows(){
-		List<HaveToKnow> result = new ArrayList<HaveToKnow>();
-		haveToKnowService.getHaveToKnows();
-		return result;
-	}
-	@RequestMapping(value = "/haveToBuys", method = RequestMethod.POST)
-	public List<HaveToBuy> getHaveToBuys(){
-		List<HaveToBuy> result = new ArrayList<HaveToBuy>();
-		haveToBuyService.getHaveToBuys();
+	@RequestMapping(value = "/scenery/{id}", method = RequestMethod.POST)
+	public Scenery getScenery(@PathVariable String id){
+	
+		Scenery result = new Scenery();
+		result = sceneryService.getSceneryById(id);
 		return result;
 	}
 }
